@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <description>Scheduled flow demonstrating wait element. Waits for Account Type changes and retrieves related records.</description>
+    <interviewLabel>Pharos - Scheduled Flow with Wait Element {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pharos - Scheduled Flow with Wait Element</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Opp</name>
+        <label>Create Opp</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>CloseDate</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+        </inputAssignments>
+        <object>Opportunity</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Account</name>
+        <label>Get Account</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Opp</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Asset</name>
+        <label>Get Asset</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Opp</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Asset</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_case</name>
+        <label>Get case</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Opp</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Contact</name>
+        <label>Get Contact</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Opp</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Opp</name>
+        <label>Get Opp</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Opp</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Copy_1_of_Copy_2_of_Wait_until_Account_Type_is_changed</targetReference>
+        </connector>
+        <object>Account</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2025-02-13</startDate>
+            <startTime>00:30:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Create Opp</description>
+        <name>h_32240d56fb61e9f7786ee678234a5ea3_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;CREATE RECORDS: &lt;/span&gt;Create Opp&lt;br&gt;
+&lt;span&gt;Create Opportunity record(s) with these field values:&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;CloseDate = null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Name = null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;StageName = null&lt;/span&gt;&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Result&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;\{!Create_Opp} ({!Create_Opp})&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_ec208eb9e0db86c502383a5be1b43a7b_PostLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 1 of Copy 3 of Copy 5..., Before: Create Opp</description>
+        <name>h_546f01caa611fada5ba9703957e6cabd_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;Copy_1_of_Copy_3_of_Copy_5_of_Send_message_the_Type_is_changed_to_Prospect&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackAppIdForToken = A03269G3DNE&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackWorkspaceIdForToken = T07CM66NMRQ&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackConversationId = C08DNT1SZ96&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackMessage = Type is changed to Prospect&lt;/span&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_ce1bfe88e4d1be7e74abb1e810813677_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Start, Before: Copy 1 of Copy 2 of Wait until Account Type is changed</description>
+        <name>h_8794927f90f42fa44e9b4dc399fd1758_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;style&gt;
+span,a {
+ font-size: 16px;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;
+&lt;span&gt;&lt;img src=&quot;https://a.sfdcstatic.com/shared/images/c360-nav/mobile_logo.png&quot; alt=&quot;Salesforce logo&quot; width=&quot;40px&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size:x-large;font-weight:bold&quot;&gt;An Error Occurred with Your &quot;DY TEst Wait Element&quot; Flow&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span&gt;You&apos;ve received this email because an error occurred while your &quot;DY TEst Wait Element&quot; flow was running. &lt;a &gt;Debug this flow in Flow Builder.&lt;/a&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Error element debug (FlowActionCall).&lt;/span&gt;&lt;br&gt;&lt;span&gt;Debug: end&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;a style=&quot;background-color:#0176D3;border-radius:4px;color:white;padding:.5rem 1rem;text-decoration:none&quot;&gt;Open Flow&lt;/a&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;br&gt;&lt;span style=&quot;font-size:x-large;font-weight:bold&quot;&gt;Flow Error Details&lt;/span&gt;&lt;br&gt;&lt;br&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Flow Details&lt;/span&gt;&lt;br&gt;
+&lt;br&gt;&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Flow API Name: &lt;/span&gt;testnewmp__DY_TEst_Wait_Element&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Type: &lt;/span&gt;Flow&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Version: &lt;/span&gt;1&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Status: &lt;/span&gt;Draft&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Org: &lt;/span&gt;{!$Organization.Id} ({!$Organization.Name})&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;br&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Flow Interview Details&lt;/span&gt;&lt;br&gt;
+&lt;br&gt;&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Interview Label: &lt;/span&gt;DY TEst Wait Element&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Interview GUID: &lt;/span&gt;{!$Flow.InterviewGuid}&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Current User: &lt;/span&gt;{!$User.FirstName} {!$User.LastName}&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Start time: &lt;/span&gt;{!$Flow.InterviewStartTime}&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;Duration: &lt;/span&gt;0&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;br&gt;&lt;span style=&quot;font-weight:bold;&quot;&gt;How the Interview Started&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;{!$User.FirstName} {!$User.LastName} ({!$User.Id}) started the flow interview.&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;API Version for Running the Flow: 63.0&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Some of this flow&apos;s variables were set when the interview started.&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;$Record = Account ({!$Record})&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_32f6e79cc4a43d5d1f06650e3ff3c9c5_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 1 of Copy 2 of Accoun..., Before: Copy 3 of Copy 2 of Copy 5 ...</description>
+        <name>h_8faf2be6cae7ea1ca512fbf3ff1cbc9a_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;WAIT: &lt;/span&gt;Copy 1 of Copy 2 of Wait until Account Type is changed&lt;br&gt;
+&lt;span&gt;Waiting for: null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_2b9ebb6c130d88c329d2187971cb81bd_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Account Type is changed to..., Before: Copy 1 of Copy 2 of Copy 5 ...</description>
+        <name>h_94698e41b4e0ab8cbcda2c024d7ccf5d_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;WAIT: &lt;/span&gt;Copy 1 of Copy 2 of Wait until Account Type is changed&lt;br&gt;
+&lt;span&gt;Waiting for: null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_71aee243c12675b08c6179b9ba9730d9_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 2 of Copy 2 of Copy 5..., Before: Copy 1 of Copy 3 of Copy 5 ...</description>
+        <name>h_a264e418e51236f6a9479ec5cb15ae47_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;Copy_2_of_Copy_2_of_Copy_5_of_Send_message_the_Type_is_changed_to_Prospect&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackAppIdForToken = A03269G3DNE&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackWorkspaceIdForToken = T07CM66NMRQ&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackConversationId = C08DNT1SZ96&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackMessage = Type is changed to Prospect&lt;/span&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_5b28c1dd2a4e1fc2bd2c10e71379016c_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 1 of Copy 2 of Accoun..., Before: Copy 4 of Copy 2 of Copy 5 ...</description>
+        <name>h_bdb7d99a543cd74fd52fe1ed648e6a18_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;WAIT: &lt;/span&gt;Copy 1 of Copy 2 of Wait until Account Type is changed&lt;br&gt;
+&lt;span&gt;Waiting for: null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_fae99d829e3438e4bc512344f4c51049_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 4 of Copy 2 of Copy 5..., Before: Copy 1 of Copy 3 of Copy 5 ...</description>
+        <name>h_cbb32b34ebc228b0278038079d5b4a3e_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;Copy_4_of_Copy_2_of_Copy_5_of_Send_message_the_Type_is_changed_to_Prospect&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackAppIdForToken = A03269G3DNE&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackWorkspaceIdForToken = T07CM66NMRQ&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackConversationId = C08DNT1SZ96&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackMessage = Type is changed to Prospect&lt;/span&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_579a7a4e942793e3cd9260fc5f92a7fa_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 1 of Copy 2 of Accoun..., Before: Copy 2 of Copy 2 of Copy 5 ...</description>
+        <name>h_cd8860aadec075ac28586d0569118120_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;WAIT: &lt;/span&gt;Copy 1 of Copy 2 of Wait until Account Type is changed&lt;br&gt;
+&lt;span&gt;Waiting for: null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_76d191c129a0a9167a24cc8ff4c9b20c_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 1 of Copy 2 of Wait u..., Before: Copy 1 of Copy 3 of Copy 5 ...</description>
+        <name>h_d2abe24a439e0aa48070e6ad3832e6e0_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;WAIT: &lt;/span&gt;Copy 1 of Copy 2 of Wait until Account Type is changed&lt;br&gt;
+&lt;span&gt;Waiting for: null&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;Event Type: DateRefAlarmEvent&lt;/span&gt;&lt;br&gt;&lt;span&gt;Condition: and&lt;/span&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_5770d7461a1efe26ab25fb147652ad5e_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 1 of Copy 2 of Copy 5..., Before: Copy 1 of Copy 3 of Copy 5 ...</description>
+        <name>h_e465f1b2c1b6e3e00fdc52a01d1ec2be_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;Copy_1_of_Copy_2_of_Copy_5_of_Send_message_the_Type_is_changed_to_Prospect&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackAppIdForToken = A03269G3DNE&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackWorkspaceIdForToken = T07CM66NMRQ&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackConversationId = C08DNT1SZ96&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackMessage = Type is changed to Prospect&lt;/span&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_578209aecac3e6696780c2c845f85bab_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Pharos Flow Template for Log After: Copy 3 of Copy 2 of Copy 5..., Before: Copy 1 of Copy 3 of Copy 5 ...</description>
+        <name>h_e4d426c6a1c51f29f425ba681597199e_Pharos_Template</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;Copy_3_of_Copy_2_of_Copy_5_of_Send_message_the_Type_is_changed_to_Prospect&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackAppIdForToken = A03269G3DNE&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackWorkspaceIdForToken = T07CM66NMRQ&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackConversationId = C08DNT1SZ96&lt;/span&gt;&lt;br&gt;
+&lt;span&gt;slackMessage = Type is changed to Prospect&lt;/span&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;(APEX): &lt;/span&gt;h_72c8cfe2842ca9f2ed35e51a8828a8db_PostPreLog&lt;br&gt;
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Inputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;span style=&quot;font-weight:bold;&quot;&gt;Outputs:&lt;/span&gt;&lt;br&gt;
+
+&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>Pharos Full Stacktrace</description>
+        <name>Pharos_Full_Stacktrace</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue> </stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>Test</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <waits>
+        <name>Copy_1_of_Copy_2_of_Wait_until_Account_Type_is_changed</name>
+        <label>Copy 1 of Copy 2 of Wait until Account Type is changed</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Account</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Path</defaultConnectorLabel>
+        <waitEvents>
+            <name>Copy_1_of_Copy_2_of_Account_Type_is_changed_to_Channel_Partner_Reseller</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Channel Partner / Reseller</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_case</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Account</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>LastModifiedDate</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>$Record.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Hours</stringValue>
+                </value>
+            </inputParameters>
+            <label>Account Type is changed to Channel Partner / Reseller</label>
+        </waitEvents>
+        <waitEvents>
+            <name>Copy_1_of_Copy_2_of_Account_Type_is_changed_to_Customer_Channel</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer - Channel</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Contact</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Account</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>LastModifiedDate</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>$Record.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Hours</stringValue>
+                </value>
+            </inputParameters>
+            <label>Copy 1 of Copy 2 of Account Type is changed to Customer - Channel</label>
+        </waitEvents>
+        <waitEvents>
+            <name>Copy_1_of_Copy_2_of_Account_Type_is_changed_to_Other</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Other</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Opp</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Account</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>LastModifiedDate</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>$Record.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+            </inputParameters>
+            <label>Copy 1 of Copy 2 of Account Type is changed to Other</label>
+        </waitEvents>
+        <waitEvents>
+            <name>Copy_1_of_Copy_2_of_Account_Type_is_changed_to_Prospect</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Prospect</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Asset</targetReference>
+            </connector>
+            <eventType>DateRefAlarmEvent</eventType>
+            <inputParameters>
+                <name>TimeTableColumnEnumOrId</name>
+                <value>
+                    <stringValue>Account</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeFieldColumnEnumOrId</name>
+                <value>
+                    <stringValue>LastModifiedDate</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>EntityObjectId</name>
+                <value>
+                    <elementReference>$Record.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+            </inputParameters>
+            <label>Copy 1 of Copy 2 of Account Type is changed to Prospect</label>
+        </waitEvents>
+    </waits>
+</Flow>
