@@ -1,0 +1,1 @@
+trigger Qa3035Trigger on Account (before insert) { if (Trigger.new[0].Name == 'QA3035') throw new IllegalArgumentException('ERP sync failed: 500 {"error":"internal_error","message":"down"}'); }
