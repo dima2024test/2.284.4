@@ -213,6 +213,7 @@
         <expression>IF({!varHighCases} &gt; 0, &apos;High&apos;, &apos;Normal&apos;)</expression>
     </formulas>
     <groups>
+        <description>test</description>
         <name>Test_G1</name>
         <label>Test G1</label>
         <locationX>1326</locationX>
