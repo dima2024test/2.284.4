@@ -4,9 +4,10 @@
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Asg_Count_Task</name>
+        <group>Group_1</group>
         <label>Asg Count Task</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>468</locationX>
+        <locationY>1595</locationY>
         <assignmentItems>
             <assignToReference>varSameDayCount</assignToReference>
             <operator>Add</operator>
@@ -21,8 +22,8 @@
     <assignments>
         <name>Asg_Due_Later</name>
         <label>Asg Due Later</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>314</locationX>
+        <locationY>503</locationY>
         <assignmentItems>
             <assignToReference>$Record.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -37,8 +38,8 @@
     <assignments>
         <name>Asg_Due_Tomorrow</name>
         <label>Asg Due Tomorrow</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>50</locationX>
+        <locationY>503</locationY>
         <assignmentItems>
             <assignToReference>$Record.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -53,8 +54,8 @@
     <assignments>
         <name>Asg_Priority_High</name>
         <label>Asg Priority High</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>94</locationX>
+        <locationY>1103</locationY>
         <assignmentItems>
             <assignToReference>$Record.Priority</assignToReference>
             <operator>Assign</operator>
@@ -68,9 +69,10 @@
     </assignments>
     <assignments>
         <name>Asg_Push_Due_Date</name>
+        <group>Group_2</group>
         <label>Asg Push Due Date</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>248</locationX>
+        <locationY>1895</locationY>
         <assignmentItems>
             <assignToReference>$Record.Description</assignToReference>
             <operator>Assign</operator>
@@ -85,12 +87,15 @@
                 <elementReference>fxNextDay</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>END_ELEMENT_5</targetReference>
+        </connector>
     </assignments>
     <decisions>
         <name>Dec_Closing_Soon</name>
         <label>Dec Closing Soon</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>226</locationX>
+        <locationY>995</locationY>
         <defaultConnector>
             <targetReference>Get_Same_Day_Tasks</targetReference>
         </defaultConnector>
@@ -128,8 +133,8 @@
     <decisions>
         <name>Dec_Due_Date_Missing</name>
         <label>Dec Due Date Missing</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>380</locationX>
+        <locationY>287</locationY>
         <defaultConnector>
             <targetReference>Dec_Related_To_Opp</targetReference>
         </defaultConnector>
@@ -152,9 +157,13 @@
     </decisions>
     <decisions>
         <name>Dec_Overloaded</name>
+        <group>Group_2</group>
         <label>Dec Overloaded</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>380</locationX>
+        <locationY>1787</locationY>
+        <defaultConnector>
+            <targetReference>END_ELEMENT_5</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Capacity OK</defaultConnectorLabel>
         <rules>
             <name>Overloaded</name>
@@ -182,8 +191,8 @@
     <decisions>
         <name>Dec_Priority_For_Default</name>
         <label>Dec Priority For Default</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>182</locationX>
+        <locationY>395</locationY>
         <defaultConnector>
             <targetReference>Asg_Due_Later</targetReference>
         </defaultConnector>
@@ -207,8 +216,8 @@
     <decisions>
         <name>Dec_Related_To_Opp</name>
         <label>Dec Related To Opp</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>380</locationX>
+        <locationY>779</locationY>
         <defaultConnector>
             <targetReference>Get_Same_Day_Tasks</targetReference>
         </defaultConnector>
@@ -230,6 +239,11 @@
         </rules>
     </decisions>
     <description>Before-save on open Task create: defaults a missing due date from Priority, raises Priority for tasks on Opportunities closing within 7 days, and pushes the due date one day out when the owner already has 10+ open tasks that day.</description>
+    <ends>
+        <name>END_ELEMENT_5</name>
+        <locationX>380</locationX>
+        <locationY>2087</locationY>
+    </ends>
     <environments>Default</environments>
     <formulas>
         <name>fxBalanceNote</name>
@@ -261,13 +275,30 @@
         <dataType>String</dataType>
         <expression>LEFT({!$Record.WhatId}, 3)</expression>
     </formulas>
+    <groups>
+        <name>Group_1</name>
+        <label>Group 1</label>
+        <locationX>380</locationX>
+        <locationY>0</locationY>
+        <groupType>generic</groupType>
+        <sourceReference>Get_Same_Day_Tasks</sourceReference>
+    </groups>
+    <groups>
+        <name>Group_2</name>
+        <label>Group 2</label>
+        <locationX>380</locationX>
+        <locationY>0</locationY>
+        <groupType>generic</groupType>
+        <sourceReference>Group_1</sourceReference>
+    </groups>
     <interviewLabel>RTF Task Before Save Workload Balancer {!$Flow.CurrentDateTime}</interviewLabel>
     <label>RTF Task Before Save Workload Balancer</label>
     <loops>
         <name>Loop_Same_Day</name>
+        <group>Group_1</group>
         <label>Loop Same Day</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>380</locationX>
+        <locationY>1487</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Same_Day_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -300,8 +331,8 @@
     <recordLookups>
         <name>Get_Opportunity</name>
         <label>Get Opportunity</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>226</locationX>
+        <locationY>887</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Closing_Soon</targetReference>
@@ -321,8 +352,8 @@
     <recordLookups>
         <name>Get_Same_Day_Tasks</name>
         <label>Get Same Day Tasks</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>380</locationX>
+        <locationY>1379</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Same_Day</targetReference>
@@ -354,7 +385,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>0</locationX>
+        <locationX>254</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Due_Date_Missing</targetReference>
@@ -371,7 +402,7 @@
         <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>varSameDayCount</name>
         <dataType>Number</dataType>
