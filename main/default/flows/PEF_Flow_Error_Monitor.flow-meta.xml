@@ -4,11 +4,11 @@
         <name>Send_Threshold_Email</name>
         <label>Send Threshold Email</label>
         <locationX>50</locationX>
-        <locationY>1310</locationY>
+        <locationY>1202</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
-            <targetReference>Sub_Log_Flow_Error</targetReference>
+            <targetReference>sadfasdfsadfdfd</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -43,7 +43,7 @@
         <name>Asg_Category_Action</name>
         <label>Asg Category Action</label>
         <locationX>314</locationX>
-        <locationY>794</locationY>
+        <locationY>686</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -59,7 +59,7 @@
         <name>Asg_Category_Data</name>
         <label>Asg Category Data</label>
         <locationX>50</locationX>
-        <locationY>794</locationY>
+        <locationY>686</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -82,7 +82,7 @@
         <name>Asg_Category_Other</name>
         <label>Asg Category Other</label>
         <locationX>578</locationX>
-        <locationY>794</locationY>
+        <locationY>686</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -98,7 +98,7 @@
         <name>Asg_Recent_Count</name>
         <label>Asg Recent Count</label>
         <locationX>314</locationX>
-        <locationY>1094</locationY>
+        <locationY>986</locationY>
         <assignmentItems>
             <assignToReference>varRecentCount</assignToReference>
             <operator>AssignCount</operator>
@@ -114,7 +114,7 @@
         <name>Asg_Unknown_User</name>
         <label>Asg Unknown User</label>
         <locationX>446</locationX>
-        <locationY>494</locationY>
+        <locationY>386</locationY>
         <assignmentItems>
             <assignToReference>varUserLabel</assignToReference>
             <operator>Assign</operator>
@@ -130,7 +130,7 @@
         <name>Asg_User_Context</name>
         <label>Asg User Context</label>
         <locationX>182</locationX>
-        <locationY>494</locationY>
+        <locationY>386</locationY>
         <assignmentItems>
             <assignToReference>varUserLabel</assignToReference>
             <operator>Assign</operator>
@@ -153,7 +153,7 @@
         <name>Dec_Error_Type</name>
         <label>Dec Error Type</label>
         <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationY>578</locationY>
         <defaultConnector>
             <targetReference>Asg_Category_Other</targetReference>
         </defaultConnector>
@@ -193,9 +193,9 @@
         <name>Dec_Threshold</name>
         <label>Dec Threshold</label>
         <locationX>314</locationX>
-        <locationY>1202</locationY>
+        <locationY>1094</locationY>
         <defaultConnector>
-            <targetReference>Sub_Log_Flow_Error</targetReference>
+            <targetReference>sadfasdfsadfdfd</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Below Threshold</defaultConnectorLabel>
         <rules>
@@ -218,7 +218,7 @@
         <name>Dec_User_Found</name>
         <label>Dec User Found</label>
         <locationX>314</locationX>
-        <locationY>386</locationY>
+        <locationY>278</locationY>
         <defaultConnector>
             <targetReference>Asg_Unknown_User</targetReference>
         </defaultConnector>
@@ -250,7 +250,7 @@
     <ends>
         <name>END_ELEMENT_3</name>
         <locationX>1370</locationX>
-        <locationY>494</locationY>
+        <locationY>386</locationY>
     </ends>
     <ends>
         <name>END_ELEMENT_4</name>
@@ -303,7 +303,7 @@
         <name>Log_Fault</name>
         <label>Log Fault</label>
         <locationX>1370</locationX>
-        <locationY>386</locationY>
+        <locationY>278</locationY>
         <connector>
             <targetReference>END_ELEMENT_3</targetReference>
         </connector>
@@ -341,26 +341,23 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
-        <name>QA_Fail_Create_Account</name>
-        <label>QA Fail Create Account</label>
+        <name>sadfasdfsadfdfd</name>
+        <label>sadfasdfsadfdfd</label>
         <locationX>314</locationX>
-        <locationY>170</locationY>
+        <locationY>1442</locationY>
         <connector>
-            <targetReference>Get_Interview_User</targetReference>
+            <targetReference>Sub_Log_Flow_Error</targetReference>
         </connector>
         <inputAssignments>
-            <field>Name</field>
-            <value>
-                <stringValue>QA LOG-3100</stringValue>
-            </value>
+            <field>CloseDate</field>
         </inputAssignments>
         <inputAssignments>
-            <field>OwnerId</field>
-            <value>
-                <stringValue>005000000000000AAA</stringValue>
-            </value>
+            <field>Name</field>
         </inputAssignments>
-        <object>Account</object>
+        <inputAssignments>
+            <field>StageName</field>
+        </inputAssignments>
+        <object>Opportunity</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
@@ -418,7 +415,7 @@
         <name>Get_Interview_User</name>
         <label>Get Interview User</label>
         <locationX>314</locationX>
-        <locationY>278</locationY>
+        <locationY>170</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_User_Found</targetReference>
@@ -442,7 +439,7 @@
         <name>Get_Recent_Error_Logs</name>
         <label>Get Recent Error Logs</label>
         <locationX>314</locationX>
-        <locationY>986</locationY>
+        <locationY>878</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Recent_Count</targetReference>
@@ -481,13 +478,13 @@
         <locationX>188</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>QA_Fail_Create_Account</targetReference>
+            <targetReference>Get_Interview_User</targetReference>
         </connector>
         <flowRunAsUser>TriggeringUser</flowRunAsUser>
         <object>FlowExecutionErrorEvent</object>
         <triggerType>PlatformEvent</triggerType>
     </start>
-    <status>Obsolete</status>
+    <status>Draft</status>
     <textTemplates>
         <name>ttAlert</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
