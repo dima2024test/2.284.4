@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtlClntAppOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <commaSeparatedOauthScopes>Api, Web, Full, RefreshToken</commaSeparatedOauthScopes>
+    <externalClientApplication>pharos_00DWs00000UZmA9</externalClientApplication>
+    <isFirstPartyAppEnabled>false</isFirstPartyAppEnabled>
+    <label>pharos_00DWs00000UZmA9_oauth</label>
+    <oauthLink>00DWs00000UZmA9:888Ws0000023Ud7</oauthLink>
+</ExtlClntAppOauthSettings>
